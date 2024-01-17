@@ -1,0 +1,59 @@
+.Card {
+  width: 100%;
+  border-radius: 5px;
+  background-color: var(--background2);
+  margin-bottom: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.controls {
+  padding: 0 1rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7em;
+  font-weight: 700;
+}
+
+.segregate {
+
+  &-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $color_primary_light;
+    transition: all 200ms ease-in-out;
+    margin-right: 1rem;
+    cursor: pointer;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+
+    &:hover,
+    &:active {
+      color: $color_primary;
+    }
+
+    &-active {
+        color: $color_primary !important;
+    }
+  }
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  color: $color_primary_light;
+  transition: all 200ms ease-in-out;
+
+  &:hover,
+  &:active {
+    color: $color_primary;
+  }
+}

@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 0 1.5rem 0;
+  width: clamp(20rem, 10vw + 20rem, 42rem);
+
+  &_subtitle {
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+    font-weight: 700;
+    margin: 0.5rem;
+  }
+}
+
+.header h1 {
+  margin: 0.5rem;
+}
+
+.toggle_mode {
+  display: flex;
+  gap: 2rem;
+}
+
+.toggle_mode button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
