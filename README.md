@@ -14,17 +14,10 @@ Dark/Lightmode is available for the application.
 - Vite
 - TypeScript
 - Redux-Toolkit
-- localStorage
-
-## 💻 Demo
-Click the link and check the app: [Link](https://ms-todo-app-react.netlify.app/)
-
-### Screenshot
-
-![](./src/assets/screenshot.JPG)
+- Redux-Persist
 
 ## 💾 Installation
-git clone https://github.com/marcinsuski/todo-app-react.git <br>
+git clone https://github.com/NguyenCongVN/Todolist.git <br>
 npm install<br>
 npm run dev // for localhost server<br>
 npm run build // to create a build<br>
@@ -33,6 +26,5 @@ npm run build // to create a build<br>
 In case of any comments or advice, You can e-mail me or use Issues :)
 
 ## 🧙‍♂️ Author
-- GitHub - [Marcin Suski](https://github.com/marcinsuski)
-- LinkedIn - [marcin-suski](https://www.linkedin.com/in/marcin-suski/)
-- Porftolio - [marcinsuski.pl](https://marcinsuski.pl)
+- GitHub - [Nguyen Cong](https://github.com/NguyenCongVN)
+- LinkedIn - [Nguyen Cong](https://www.linkedin.com/in/c%C3%B4ng-nguy%E1%BB%85n-687808293/)
