@@ -83,7 +83,7 @@ const TodoItem = ({ todo }: TodoProps) => {
               </p>
 
               <p>
-                {todo.dueDate}
+                {new Date(todo.dueDate).toLocaleDateString()}
               </p>
             </Typography>
           )}
