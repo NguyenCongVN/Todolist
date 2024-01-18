@@ -40,16 +40,18 @@ const App: React.FC = () => {
   // variable to save the name of the new todo
   const [todoName, setTodoName] = useState("");
   const [todoDescription, setTodoDescription] = useState("");
+  const [dueDate, setDueDate] = useState<string>(new Date().toISOString());
   const [usernameDialog, setUsernameDialog] = useState("");
   const [open, setOpen] = useState(username === "Guest");
   const [errorSetUsername, setErrorSetUsername] = useState(false);
+  const [errorAddTodo, setErrorAddTodo] = useState(false);
 
   return (
     <div className="container">
-      <Header setOpen={setOpen}/>
+      <Header setOpen={setOpen} />
       <Box className="new_todo">
         <Typography variant="body1" sx={{ flex: "1", padding: "0 0.7rem" }}>
-            <b>Todo name</b>
+          <b>Todo name</b>
         </Typography>
         <input
           required
@@ -59,17 +61,34 @@ const App: React.FC = () => {
           onKeyDown={(e) => {
             // Check if the key pressed is Enter
             if (e.key === "Enter") {
+              // Check todo name is not empty
+              if (todoName.length === 0) {
+                setErrorAddTodo(true);
+                return;
+              }
+
+              // Check due date is not empty
+              if (dueDate.length === 0) {
+                setErrorAddTodo(true);
+                return;
+              }
+
+              setErrorAddTodo(false);
+
               // dispatch the action to add a new todo
               dispatch(
                 addTodo({
                   id: nanoid(),
                   name: todoName,
                   completed: false,
-                  description: todoDescription
+                  dueDate: dueDate,
+                  description: todoDescription,
                 })
               );
               // clear the input field
               setTodoName("");
+              // clear the description field
+              setTodoDescription("");
             }
           }}
           value={todoName}
@@ -78,18 +97,35 @@ const App: React.FC = () => {
           <button
             className="new_todo-btn"
             onClick={() => {
+              // Check todo name is not empty
+              if (todoName.length === 0) {
+                setErrorAddTodo(true);
+                return;
+              }
+
+              // Check due date is not empty
+              if (dueDate.length === 0) {
+                setErrorAddTodo(true);
+                return;
+              }
+
+              setErrorAddTodo(false);
+
               // dispatch the action to add a new todo
               dispatch(
                 addTodo({
                   id: nanoid(),
                   name: todoName,
                   description: todoDescription,
+                  dueDate: dueDate,
                   completed: false,
                 })
               );
 
               // clear the input field
               setTodoName("");
+              // clear the description field
+              setTodoDescription("");
             }}
           >
             Add
@@ -104,8 +140,30 @@ const App: React.FC = () => {
           value={todoDescription}
         />
       </Box>
+
+      <Box className="new_todo new_todo_due_date">
+        <Typography variant="body1" sx={{ flex: "1", padding: "0 0.7rem" }}>
+          <b>Due date</b>
+        </Typography>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => {
+            if (e.target.valueAsDate) {
+              setDueDate(e.target.value);
+            }
+          }}
+        />
+      </Box>
+
+      {/* Show error add todo */}
+      {errorAddTodo && (
+        <Typography variant="body1" color="error">
+          Please enter valid todo name
+        </Typography>
+      )}
+
       <Todolist colorTheme={theme} />
-      {/* TODO: Implement this later */}
       <div className="reorder">Drag and drop to reorder list</div>
       <Footer />
 

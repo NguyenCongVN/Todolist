@@ -1,5 +1,4 @@
 .todo {
-    
   &_list {
     background-color: transparent;
   }
@@ -17,6 +16,76 @@
     color: $color-primary-light;
     cursor: pointer;
 
+    &--title {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &_edit {
+      &-title {
+        width: 100%;
+        height: 5rem;
+        outline: transparent;
+        border: none;
+        background-color: inherit;
+        display: flex;
+        align-items: center;
+        color: $color-primary-light;
+        cursor: pointer;
+        font-size: 1.5rem;
+        padding: 1rem;
+        font-family: "Josefin Sans", sans-serif;
+        // underline
+        text-decoration: underline;
+
+        &-container {
+          display: flex;
+        }
+      }
+
+      &-date {
+        width: 50%;
+        background-color: transparent;
+        border: none;
+        color: $color-primary-light;
+        outline: transparent;
+        font-size: 1.4rem;
+        font-family: "Josefin Sans", sans-serif;
+
+        // calendar icon
+        &::-webkit-calendar-picker-indicator {
+          color: $color-primary-light;
+          border-width: thin;
+        }
+      }
+
+      &-description {
+        width: 100%;
+        min-height: 10rem;
+        padding: 10px;
+        border: none;
+        background: $color-primary-dark2;
+        outline: transparent;
+        color: $color-primary-light;
+        font-size: 1rem;
+        font-family: "Josefin Sans", sans-serif;
+
+        &::placeholder {
+          text-align: center;
+        }
+      }
+    }
+
+    &_container {
+      flex-direction: column;
+    }
+
+    &--description {
+      min-height: 5rem;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+
     &--btn {
       width: 3rem;
       height: 3rem;
@@ -27,7 +96,6 @@
       &:hover {
         color: $color-primary;
       }
-
 
       & > .icon {
         width: 2rem;

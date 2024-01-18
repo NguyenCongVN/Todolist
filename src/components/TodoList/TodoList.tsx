@@ -6,6 +6,7 @@ import {
   deleteTodo,
   clearCompleted,
   TodoSliceState,
+  setTodos,
 } from "../../redux/todos";
 import { RootState } from "../../redux/store";
 import { ToDoItemState } from "../../constant/todoItem";
@@ -14,11 +15,25 @@ import { ToDoItemState } from "../../constant/todoItem";
 import TodoItem from "../TodoItem/TodoItem";
 import { Box } from "@mui/material";
 
+import {
+  DropResult,
+  DraggableProvided,
+  DroppableProvided,
+  resetServerContext
+} from "react-beautiful-dnd";
+import { AppDraggableList } from "../DragAndDrop/DragAndDrop";
+import { TodosType } from "../../interface/todo";
+
 export interface ThemeProps {
   colorTheme: string;
 }
 
 const Todolist = ({ colorTheme }: ThemeProps) => {
+
+  useEffect(() => {
+    resetServerContext();
+  }, []);
+
   // Local State
   const [visibleTodos, setVisibleTodos] = useState(ToDoItemState.ALL);
 
@@ -59,24 +74,69 @@ const Todolist = ({ colorTheme }: ThemeProps) => {
       ? completedTodos
       : todos.value;
 
+  const handleDragEnd = (result: DropResult) => {
+    // Handle drag end logic
+    console.log('result', result)
+
+    // Get source item
+    const source = result.source;
+
+    // Get destination item
+    const destination = result.destination;
+
+    // If there is no destination, do nothing
+    if (!destination) {
+      return;
+    }
+
+    // If the source and destination are the same, do nothing
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    // Reorder the list
+    const newTodos = [...todos.value];
+
+    // Remove the item from the source position
+    const [removed] = newTodos.splice(source.index, 1);
+
+    // Add the item to the destination position
+    newTodos.splice(destination.index, 0, removed);
+
+    // Update the state
+    dispatch(setTodos(newTodos));
+  };
+
+  const renderTodoItem = (todo: TodosType, provided: DraggableProvided) => {
+    return (
+      <div
+        className="item"
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+      >
+        <TodoItem todo={todo} />
+      </div>
+    );
+  };
+
   return (
     <Box className="Card">
-      <Box className="todo_list">
-        {todos &&
-          currentTodos?.map(
-            (
-              item: {
-                id: string;
-                name: string;
-                completed: boolean;
-                description: string;
-              },
-            ) => (
-              <TodoItem
-                todo={item}
-              />
-            )
-          )}
+      <Box
+        className="todo_list"
+      >
+        {todos && (
+          <AppDraggableList
+            droppableId="todolist" // specific for this drag n drop container
+            data={currentTodos}
+            onDragEnd={handleDragEnd}
+            renderItem={renderTodoItem}
+            direction="vertical"
+          />
+        )}
 
         <Box className="controls">
           <Box>
