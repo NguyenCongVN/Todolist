@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   deleteTodo,
   clearCompleted,
-  TodosType,
   TodoSliceState,
 } from "../../redux/todos";
 import { RootState } from "../../redux/store";
@@ -70,19 +69,11 @@ const Todolist = ({ colorTheme }: ThemeProps) => {
                 id: string;
                 name: string;
                 completed: boolean;
+                description: string;
               },
-              index: number
             ) => (
               <TodoItem
-                deleteHandler={() =>
-                  // Pass the id of the todo to be deleted
-                  dispatch(deleteTodo(item.id))
-                }
-                index={index}
-                key={item.id}
-                id={item.id}
-                completed={item.completed}
-                name={item.name}
+                todo={item}
               />
             )
           )}

@@ -39,24 +39,18 @@ const App: React.FC = () => {
   // Local State
   // variable to save the name of the new todo
   const [todoName, setTodoName] = useState("");
+  const [todoDescription, setTodoDescription] = useState("");
   const [usernameDialog, setUsernameDialog] = useState("");
   const [open, setOpen] = useState(username === "Guest");
   const [errorSetUsername, setErrorSetUsername] = useState(false);
 
   return (
     <div className="container">
-      <Header />
+      <Header setOpen={setOpen}/>
       <Box className="new_todo">
-        <Box
-          className="checkbox_container"
-          sx={{
-            width: "2.5rem",
-            height: "2.5rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        ></Box>
+        <Typography variant="body1" sx={{ flex: "1", padding: "0 0.7rem" }}>
+            <b>Todo name</b>
+        </Typography>
         <input
           required
           type="text"
@@ -71,9 +65,9 @@ const App: React.FC = () => {
                   id: nanoid(),
                   name: todoName,
                   completed: false,
+                  description: todoDescription
                 })
               );
-
               // clear the input field
               setTodoName("");
             }
@@ -89,6 +83,7 @@ const App: React.FC = () => {
                 addTodo({
                   id: nanoid(),
                   name: todoName,
+                  description: todoDescription,
                   completed: false,
                 })
               );
@@ -100,6 +95,14 @@ const App: React.FC = () => {
             Add
           </button>
         </Box>
+      </Box>
+
+      <Box className="new_todo new_todo_description">
+        <textarea
+          placeholder="Description"
+          onChange={(e) => setTodoDescription(e.target.value)}
+          value={todoDescription}
+        />
       </Box>
       <Todolist colorTheme={theme} />
       {/* TODO: Implement this later */}

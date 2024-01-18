@@ -3,25 +3,46 @@
 }
 
 .new_todo {
-  height: 3rem;
   border-radius: 5px;
-  background-color: var(--background2);
-  color: var(--secondary);
+  background-color: $color-primary-dark;
+  color: $color-primary-light;
   border: none;
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
 
-.new_todo input {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  background: transparent;
-  outline: transparent;
-  color: var(--secondary3);
+  & > input {
+    width: 70%;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    outline: transparent;
+    color: $color-primary-light;
+  }
+
+  &_description {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > textarea {
+      width: 100%;
+      min-height: 10rem;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      outline: transparent;
+      color: $color-primary-light;
+      font-size: 1rem;
+
+      &::placeholder {
+        text-align: center;
+      }
+    }
+  }
 }
 
 .new_todo-btn {
@@ -38,8 +59,6 @@
 .new_todo-btn:hover {
   color: var(--accent);
 }
-
-
 
 .reorder {
   text-align: center;
